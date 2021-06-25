@@ -48,6 +48,7 @@ void  RingBufferDestroy(RingBuffer* rb)
     COM_MEM_FREE(rb);
 }
 
+/* Single Read */
 void* RingBufferSrGet(RingBuffer* rb)
 {
 	void *ptr = NULL;
@@ -68,6 +69,7 @@ void* RingBufferSrGet(RingBuffer* rb)
 	return ptr;
 }
 
+/*Single Write*/
 int RingBufferSwPut(RingBuffer* rb, void *ptr)
 {
 	if (NULL == rb || NULL == rb->array || NULL == ptr) {
@@ -131,7 +133,7 @@ void *thread2(void *arg)
 
         value = *(uint64_t*)ptr;
         if (value != loop) {
-            printf("## value!=loop value:%lu, loop:%lu\n", value, loop);
+            printf("## [ERROR] value!=loop value:%lu, loop:%lu\n", value, loop);
             exit(1); 
         }
             //printf("value:%lu, loop:%lu\n", value, loop);
